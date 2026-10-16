@@ -2084,7 +2084,7 @@ window.__flex_g_settings = {
 // is_building_collection: true,
 window.idx_main_settings = {
   type_filter: "sold",
-  lookup_previous_sold_value: "2",
+  lookup_previous_sold_value: "6",
   lookup_previous_sold: "month",
   is_display_filter: true,
   paths: "https://joseph.idxboost.cloud/wp-content/plugins/idxboost/react/building-collection/",
