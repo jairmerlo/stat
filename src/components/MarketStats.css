@@ -1,0 +1,81 @@
+.ms {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 8px;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 48px 16px;
+  font-family: "Montserrat", system-ui, sans-serif;
+  color: #1a1a1a;
+  text-align: center;
+}
+
+.ms--loading .ms-number {
+  opacity: 0.3;
+}
+
+.ms-title {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.ms-subtitle {
+  margin: 4px 0 0;
+  font-size: 11px;
+  color: #555;
+}
+
+.ms-values {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  margin-top: 12px;
+  border-top: 1px solid #bbb;
+  padding-bottom: 8px;
+}
+
+.ms-value {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Línea vertical que conecta el número con la línea horizontal */
+.ms-value::before {
+  content: "";
+  width: 1px;
+  background: #bbb;
+}
+
+.ms-value--new::before {
+  height: 20px;
+}
+
+.ms-value--active::before {
+  height: 56px;
+}
+
+.ms-number {
+  font-size: 15px;
+  letter-spacing: 0.04em;
+  transition: opacity 0.2s;
+}
+
+.ms-label {
+  margin-top: 2px;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: #888;
+  text-transform: uppercase;
+}
+
+@media (max-width: 560px) {
+  .ms {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
