@@ -1,39 +1,19 @@
 import { useEffect, useState } from "react";
-import { getDisplayFilterList, type PropertyItem } from "../api/displayFilter";
+import {
+  getDisplayFilterList,
+  type DisplayFilterMetricValue,
+  type DisplayFilterResponse,
+} from "../api/displayFilter";
 import { getDisplayFilterFilters } from "../helpers/displayFilter";
 import "./MarketStats.css";
 
 const DAYS = 30;
 
-function median(values: number[]): number | null {
-  const sorted = values.filter((v) => v > 0).sort((a, b) => a - b);
-  if (!sorted.length) return null;
-  const mid = Math.floor(sorted.length / 2);
-  return sorted.length % 2 ? sorted[mid] : Math.round((sorted[mid - 1] + sorted[mid]) / 2);
-}
+const formatPrice = (value: DisplayFilterMetricValue | undefined) =>
+  value == null ? "—" : `$${value.toLocaleString("en-US", { maximumFractionDigits: 0 })}`;
 
-const formatPrice = (v: number | null) =>
-  v === null ? "—" : `$${v.toLocaleString("en-US", { maximumFractionDigits: 0 })}`;
-
-interface Stats {
-  medianNew: number | null;
-  medianActive: number | null;
-  countNew: number;
-  countActive: number;
-}
-
-function computeStats(items: PropertyItem[], total: number): Stats {
-  const since = Date.now() / 1000 - DAYS * 86400;
-  const isNew = (p: PropertyItem) => Number(p.list_date) >= since;
-  const price = (p: PropertyItem) => Number(p.price_sold || p.price);
-  const newItems = items.filter(isNew);
-  return {
-    medianNew: median(newItems.map(price)),
-    medianActive: median(items.map(price)),
-    countNew: newItems.length,
-    countActive: total,
-  };
-}
+const formatCount = (value: DisplayFilterMetricValue | undefined) =>
+  value == null ? "—" : value.toLocaleString("en-US");
 
 function StatBlock({
   title,
@@ -63,13 +43,13 @@ function StatBlock({
 }
 
 export default function MarketStats() {
-  const [stats, setStats] = useState<Stats | null>(null);
+  const [stats, setStats] = useState<DisplayFilterResponse | null>(null);
   const [error, setError] = useState(false);
 
   useEffect(() => {
     const controller = new AbortController();
     getDisplayFilterList(getDisplayFilterFilters(), controller.signal)
-      .then((res) => setStats(computeStats(res.items ?? [], res._count ?? res.items?.length ?? 0)))
+      .then(setStats)
       .catch((e) => {
         if (e.name !== "AbortError") setError(true);
       });
@@ -82,13 +62,13 @@ export default function MarketStats() {
     <section className={`ms${stats ? "" : " ms--loading"}`}>
       <StatBlock
         title="Median Price"
-        newValue={stats ? formatPrice(stats.medianNew) : "—"}
-        activeValue={stats ? formatPrice(stats.medianActive) : "—"}
+        newValue={stats ? formatPrice(stats.median_price.new) : "—"}
+        activeValue={stats ? formatPrice(stats.median_price.active) : "—"}
       />
       <StatBlock
         title="Inventory"
-        newValue={stats ? String(stats.countNew) : "—"}
-        activeValue={stats ? String(stats.countActive) : "—"}
+        newValue={stats ? formatCount(stats.inventory.new) : "—"}
+        activeValue={stats ? formatCount(stats.inventory.active) : "—"}
       />
     </section>
   );

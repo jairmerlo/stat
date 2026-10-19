@@ -42,21 +42,16 @@ export function getExtraBoardIds(): string[] {
 export function getDisplayFilterFilters(): { [key: string]: unknown } {
   const pdf = window.paramsDisplayFilter?.data ?? {};
   const filters: { [key: string]: unknown } = {};
-  const isSale = (pdf.for ?? SalesTypes.SALE) === SalesTypes.SALE;
 
   for (const [key, value] of Object.entries(pdf)) {
     if (key === "polygon_arr" || key === "board_id") continue;
     if (hasDisplayFilterValue(value)) filters[key] = value;
   }
-  if (!isSale) {
-    if (hasDisplayFilterValue(pdf.min_rent_price)) filters.min_price = pdf.min_rent_price;
-    if (hasDisplayFilterValue(pdf.max_rent_price)) filters.max_price = pdf.max_rent_price;
-  }
   return filters;
 }
 
 // Backend espera [lat, lng] (mismo orden que persiste el WP saved-search).
-export function getDisplayFilterPolygon(): [number, number][] {
+export function getDisplayFilterPolygon(): [string, string][] {
   let raw = window.paramsDisplayFilter?.data?.polygon_arr;
   if (typeof raw === "string") {
     try {
@@ -67,6 +62,6 @@ export function getDisplayFilterPolygon(): [number, number][] {
   }
   if (!Array.isArray(raw)) return [];
   return raw
-    .map(([lat, lng]) => [Number(lat), Number(lng)] as [number, number])
-    .filter(([lat, lng]) => !isNaN(lat) && !isNaN(lng));
+    .map(([lat, lng]) => [String(lat), String(lng)] as [string, string])
+    .filter(([lat, lng]) => !isNaN(Number(lat)) && !isNaN(Number(lng)));
 }

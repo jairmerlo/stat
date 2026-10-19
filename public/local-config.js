@@ -4211,96 +4211,210 @@ window.idx_main_settings = {
 //   },
 // };
 window.paramsDisplayFilter = {
-  status: true,
-  data: {
-    parking: "--",
-    wv: "--",
-    sort: "list_date-desc",
-    min_beds: "",
-    min_price: "",
-    max_price: "--",
-    min_rent_price: "",
-    max_rent_price: "",
-    max_beds: "--",
-    min_baths: "",
-    max_baths: "--",
-    min_sqft: "",
-    max_sqft: "--",
-    min_lotsize: "",
-    max_lotsize: "--",
-    min_year: "--",
-    max_year: "--",
-    for: "sold",
-    type: "1,2,tw",
-    board_id: 1,
-    keyword_main: "",
-    polygon_arr: [
-      ["25.83132", "-80.13346"],
-      ["25.841520000000003", "-80.13706"],
-      ["25.846310000000003", "-80.12865000000001"],
-      ["25.846770000000003", "-80.11801000000001"],
-      ["25.81819", "-80.11938"],
-      ["25.79717", "-80.12041"],
-      ["25.778470000000002", "-80.12505"],
-      ["25.765330000000002", "-80.12539000000001"],
-      ["25.761460000000003", "-80.12968000000001"],
-      ["25.767650000000003", "-80.14135"],
-      ["25.784340000000004", "-80.1465"],
-      ["25.802580000000003", "-80.14942"],
-      ["25.814020000000003", "-80.14582"],
-      ["25.83132", "-80.13346"],
-      ["25.83132", "-80.13346"],
-      ["25.83132", "-80.13346"],
-      ["25.83132", "-80.13346"],
-      ["25.83132", "-80.13346"],
-      ["25.83132", "-80.13346"],
-      ["25.83132", "-80.13346"],
-      ["25.83132", "-80.13346"],
-      ["25.83132", "-80.13346"],
-      ["25.83132", "-80.13346"],
-      ["25.83132", "-80.13346"],
-      ["25.83132", "-80.13346"],
-      ["25.83132", "-80.13346"],
-      ["25.83132", "-80.13346"],
-      ["25.83132", "-80.13346"],
-      ["25.83132", "-80.13346"],
-      ["25.83132", "-80.13346"],
-      ["25.83132", "-80.13346"],
-      ["25.83132", "-80.13346"],
-      ["25.83132", "-80.13346"],
-      ["25.83132", "-80.13346"],
-      ["25.83132", "-80.13346"],
-      ["25.83132", "-80.13346"],
-      ["25.83132", "-80.13346"],
-      ["25.83132", "-80.13346"],
-    ],
-    features: "",
-    hide_pending: "",
-  },
-  board: {
-    hackbox: null,
-    board_code: 1,
-    more_info_board: {
-      last_check_timestamp: null,
-      board_logo_url: null,
-      board_disclaimer:
-        "The multiple listing information is provided by the Miami Association of Realtors® from a copyrighted compilation of listings. The compilation of listings and each individual listing are ©2023-present Miami Association of Realtors®. All Rights Reserved. The information provided is for consumers' personal, noncommercial use and may not be used for any purpose other than to identify prospective properties consumers may be interested in purchasing. All properties are subject to prior sale or withdrawal. All information provided is deemed reliable but is not guaranteed accurate, and should be independently verified. Listing courtesy of: {officeName}. tel: {office_phone}",
-      interest_rate10: "6.6290",
-      interest_rate15: "6.7010",
-      interest_rate20: "7.3560",
-      interest_rate30: "7.5000",
-      keywords_search: "Pool,Waterfront,basement,gated,pond",
-      prompt_ai_search: "Pool,Waterfront,basement,gated,pond",
-      tz_name: "America/New_York",
-      cdn_thumbnail: "https://th-fl-photos-static.idxboost.us",
-      cdn_images: "https://fl-photos-static.idxboost.us",
-      state: "FL",
+    "status": true,
+    "data": {
+        "parking": "--",
+        "wv": "--",
+        "sort": "list_date-desc",
+        "min_beds": "",
+        "min_price": "",
+        "max_price": "--",
+        "min_rent_price": "",
+        "max_rent_price": "",
+        "max_beds": "--",
+        "min_baths": "",
+        "max_baths": "--",
+        "min_sqft": "",
+        "max_sqft": "--",
+        "min_lotsize": "",
+        "max_lotsize": "--",
+        "min_year": "--",
+        "max_year": "--",
+        "for": "sold",
+        "type": "1,2,tw",
+        "board_id": 1,
+        "keyword_main": "",
+        "polygon_arr": [
+            [
+                "25.83132",
+                "-80.13346"
+            ],
+            [
+                "25.841520000000003",
+                "-80.13706"
+            ],
+            [
+                "25.846310000000003",
+                "-80.12865000000001"
+            ],
+            [
+                "25.846770000000003",
+                "-80.11801000000001"
+            ],
+            [
+                "25.81819",
+                "-80.11938"
+            ],
+            [
+                "25.79717",
+                "-80.12041"
+            ],
+            [
+                "25.778470000000002",
+                "-80.12505"
+            ],
+            [
+                "25.765330000000002",
+                "-80.12539000000001"
+            ],
+            [
+                "25.761460000000003",
+                "-80.12968000000001"
+            ],
+            [
+                "25.767650000000003",
+                "-80.14135"
+            ],
+            [
+                "25.784340000000004",
+                "-80.1465"
+            ],
+            [
+                "25.802580000000003",
+                "-80.14942"
+            ],
+            [
+                "25.814020000000003",
+                "-80.14582"
+            ],
+            [
+                "25.83132",
+                "-80.13346"
+            ],
+            [
+                "25.83132",
+                "-80.13346"
+            ],
+            [
+                "25.83132",
+                "-80.13346"
+            ],
+            [
+                "25.83132",
+                "-80.13346"
+            ],
+            [
+                "25.83132",
+                "-80.13346"
+            ],
+            [
+                "25.83132",
+                "-80.13346"
+            ],
+            [
+                "25.83132",
+                "-80.13346"
+            ],
+            [
+                "25.83132",
+                "-80.13346"
+            ],
+            [
+                "25.83132",
+                "-80.13346"
+            ],
+            [
+                "25.83132",
+                "-80.13346"
+            ],
+            [
+                "25.83132",
+                "-80.13346"
+            ],
+            [
+                "25.83132",
+                "-80.13346"
+            ],
+            [
+                "25.83132",
+                "-80.13346"
+            ],
+            [
+                "25.83132",
+                "-80.13346"
+            ],
+            [
+                "25.83132",
+                "-80.13346"
+            ],
+            [
+                "25.83132",
+                "-80.13346"
+            ],
+            [
+                "25.83132",
+                "-80.13346"
+            ],
+            [
+                "25.83132",
+                "-80.13346"
+            ],
+            [
+                "25.83132",
+                "-80.13346"
+            ],
+            [
+                "25.83132",
+                "-80.13346"
+            ],
+            [
+                "25.83132",
+                "-80.13346"
+            ],
+            [
+                "25.83132",
+                "-80.13346"
+            ],
+            [
+                "25.83132",
+                "-80.13346"
+            ],
+            [
+                "25.83132",
+                "-80.13346"
+            ],
+            [
+                "25.83132",
+                "-80.13346"
+            ]
+        ],
+        "features": "",
+        "hide_pending": "",
+        "lookup_previous_sold": "{\"type\":\"year\",\"value\":2}"
     },
-  },
-  extra: {
-    type_force_registration: "1",
-    sign_up_left_click_force_registration: "5",
-    restriction_mode_force_registration: "0",
-    is_force_registration: "1",
-  },
-};
+    "board": {
+        "hackbox": "\n\n<link rel=\"stylesheet\" href=\"https://api-cms.idxboost.dev/assets/css/addons/hackbox.css\" />\n\n<div \n    class=\"ip-hackbox ip-format-c  ip-arrows-format-a boostbox-6a3c4fcdf3589 js-ibc-hackbox\" \n    data-container-width=\"456\"\n    style=\"--ip-section-background-color: rgba(0, 0, 0, 0.4); --ip-hackbox-title-color: rgba(255, 255, 255, 1); --ip-hackbox-text-color: rgba(255, 255, 255, 1); --ip-hackbox-margin-title: 4px; --ip-hackbox-button-background-color: rgba(0, 0, 0, 1); --ip-hackbox-button-border-color: rgba(0, 0, 0, 1); --ip-hackbox-button-text-color: rgba(255, 255, 255, 1); --ip-hackbox-button-hover-background-color: rgba(255, 255, 255, 1); --ip-hackbox-button-hover-border-color: rgba(255, 255, 255, 1); --ip-hackbox-button-hover-text-color: rgba(0, 0, 0, 1); --ip-hackbox-button-margin-y: 15px; --ip-hackbox-padding-y: 25px; --ip-hackbox-padding-x: 25px; --ibc--idx-primary-color: #3f68ff\"\n    id=\"ibc-boostbox-6a3c4fcdf3589\"\n>\n    <div class=\"ip-hackbox-wrapper\">\n\n                    <div class=\"ip-section-background\">\n                                    <div class=\"ip-section-background-overlay\"></div>\n                            </div>\n\n            \n            \n                                    <div class=\"ip-video ip-position-absolute ip-inset-0 ip-w-full ip-h-full\">\n                                                    <div class=\"ms-custom-player\" \n    data-src=\"https://www.youtube.com/watch?v=pBGdt_PyCI8\" \n    data-autoplay=\"true\" \n    data-muted=\"true\" \n    data-loop=\"true\">\n</div>\n                                            </div>\n                            \n            \n            <div class=\"ip-content-hackbox\">\n                <div class=\"ip-head-hackbox\">\n                                            <h3 class=\"ip-title heading-md\">\n                            Test\n                        </h3>\n                                        \n                                            <span class=\"body-md\">\n                            Lorem ipsum dolor sit amet, consectetur adipiscing elit\n                        </span>\n                                    </div>\n            </div>\n\n            \n        \n                \n        \n            <button class=\"ip-hackbox-btn \"\n                type=\"button\">\n                Connect With Us\n            </button>\n\n        \n    \n\n         \n\n        \n    </div>\n</div>\n\n<script src=\"https://api-cms.idxboost.dev/assets/js/addons/hackbox.js\"></script>",
+        "board_code": 1,
+        "more_info_board": {
+            "last_check_timestamp": null,
+            "board_logo_url": null,
+            "board_disclaimer": "The multiple listing information is provided by the Miami Association of Realtors® from a copyrighted compilation of listings. The compilation of listings and each individual listing are ©2023-present Miami Association of Realtors®. All Rights Reserved. The information provided is for consumers' personal, noncommercial use and may not be used for any purpose other than to identify prospective properties consumers may be interested in purchasing. All properties are subject to prior sale or withdrawal. All information provided is deemed reliable but is not guaranteed accurate, and should be independently verified. Listing courtesy of: {officeName}. tel: {office_phone}",
+            "interest_rate10": "6.6290",
+            "interest_rate15": "6.7010",
+            "interest_rate20": "7.3560",
+            "interest_rate30": "7.5000",
+            "keywords_search": "Pool,Waterfront,basement,gated,pond",
+            "prompt_ai_search": "Pool,Waterfront,basement,gated,pond",
+            "tz_name": "America/New_York",
+            "cdn_thumbnail": "https://th-fl-photos-static.idxboost.us",
+            "cdn_images": "https://fl-photos-static.idxboost.us",
+            "state": "FL"
+        }
+    },
+    "extra": {
+        "type_force_registration": "1",
+        "sign_up_left_click_force_registration": "5",
+        "restriction_mode_force_registration": "0",
+        "is_force_registration": "1"
+    }
+}
