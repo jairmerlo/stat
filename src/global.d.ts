@@ -13,6 +13,7 @@ declare global {
       lookup_previous_sold?: string;
       lookup_previous_sold_value?: string | number | null;
       limit?: string | number;
+      adom?: string | number;
       search_settings?: {
         idx_extra_board?: { board_id: string | number; main: boolean }[];
       };
