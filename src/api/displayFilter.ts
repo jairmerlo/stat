@@ -3,6 +3,7 @@ import {
   getMainBoardId,
   getDisplayFilterPolygon,
 } from "../helpers/displayFilter";
+import type { FilterRenderStatItem } from "../global";
 
 const API_IDXBOOST_SEARCH =
   window.__flex_g_settings?.app_search_filter_v2 ||
@@ -23,8 +24,11 @@ export interface DisplayFilterResponse {
 }
 
 // Port de getDisplayFilterList (idx-search-react-2024/src/app/api/displayFilter.ts).
-export function buildDisplayFilterBody(filters: { [x: string]: unknown }) {
-  const pdf = window.paramsDisplayFilter?.data ?? {};
+export function buildDisplayFilterBody(
+  item: FilterRenderStatItem,
+  filters: { [x: string]: unknown }
+) {
+  const pdf = item.filters?.data ?? {};
   const value = (key: string, fallback: string) =>
     String(filters[key] ?? pdf[key as keyof typeof pdf] ?? fallback);
 
@@ -49,9 +53,9 @@ export function buildDisplayFilterBody(filters: { [x: string]: unknown }) {
     max_year: value("max_year", "--"),
     for: value("for", SalesTypes.SALE),
     type: value("type", ""),
-    board_id: String(filters.board_id ?? pdf.board_id ?? getMainBoardId()),
+    board_id: String(filters.board_id ?? pdf.board_id ?? getMainBoardId(item)),
     keyword_main: value("keyword_main", ""),
-    polygon_arr: getDisplayFilterPolygon(),
+    polygon_arr: getDisplayFilterPolygon(item),
     features: value("features", ""),
     hide_pending: value("hide_pending", ""),
     lookup_previous_sold: value("lookup_previous_sold", ""),
@@ -61,13 +65,14 @@ export function buildDisplayFilterBody(filters: { [x: string]: unknown }) {
 }
 
 export async function getDisplayFilterList(
+  item: FilterRenderStatItem,
   filters: { [x: string]: unknown },
   signal?: AbortSignal
 ): Promise<DisplayFilterResponse> {
   const res = await fetch(`${API_IDXBOOST_SEARCH}/displayfilter/search`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(buildDisplayFilterBody(filters)),
+    body: JSON.stringify(buildDisplayFilterBody(item, filters)),
     signal,
   });
   if (!res.ok) throw new Error(`displayfilter/search ${res.status}`);
