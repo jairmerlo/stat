@@ -8,9 +8,20 @@
     <title>Search Statistics</title>
   </head>
   <body>
+    <!-- Local Development Configuration - Only for testing -->
     <!-- <script src="/local-config.js"></script> -->
 
-    <div id="root-search-stat"></div>
+    <script>
+      // filterRenderStat: un contenedor por item con id = item.render
+      // (replica lo que PHP renderiza en producción)
+      (window.filterRenderStat || []).forEach(function (item) {
+        if (!item.render) return;
+        var div = document.createElement("div");
+        div.id = item.render;
+        document.body.appendChild(div);
+      });
+    </script>
+
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

@@ -5,13 +5,14 @@ import {
   type DisplayFilterResponse,
 } from "../api/displayFilter";
 import { getDisplayFilterFilters } from "../helpers/displayFilter";
+import type { FilterRenderStatItem } from "../global";
 import "./MarketStats.css";
 
 const DEFAULT_DAYS = 30;
 
-const getDays = () => {
-  const days = Number(window.idx_main_settings?.adom);
-  console.log(days);
+// adom llega en cada item; "default" o vacío usa DEFAULT_DAYS
+const getDays = (item: FilterRenderStatItem) => {
+  const days = Number(item.adom);
 
   return Number.isFinite(days) && days > 0 ? days : DEFAULT_DAYS;
 };
@@ -51,20 +52,20 @@ function StatBlock({
   );
 }
 
-export default function MarketStats() {
+export default function MarketStats({ item }: { item: FilterRenderStatItem }) {
   const [stats, setStats] = useState<DisplayFilterResponse | null>(null);
   const [error, setError] = useState(false);
-  const days = getDays();
+  const days = getDays(item);
 
   useEffect(() => {
     const controller = new AbortController();
-    getDisplayFilterList(getDisplayFilterFilters(), controller.signal)
+    getDisplayFilterList(item, getDisplayFilterFilters(item), controller.signal)
       .then(setStats)
       .catch((e) => {
         if (e.name !== "AbortError") setError(true);
       });
     return () => controller.abort();
-  }, []);
+  }, [item]);
 
   if (error) return null;
 

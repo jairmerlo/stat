@@ -1,3 +1,5 @@
+import type { FilterRenderStatItem } from "../global";
+
 export const SalesTypes = {
   SALE: "sale",
   RENT: "rent",
@@ -22,25 +24,33 @@ export function hasDisplayFilterValue(v: unknown): v is string {
   return typeof v === "string" && v !== "" && v !== "--";
 }
 
-function getBoards() {
-  return window.idx_main_settings?.search_settings?.idx_extra_board || [];
+// Items de window.filterRenderStat que tienen contenedor (render)
+export const getFilterRenderStatItems = (): FilterRenderStatItem[] =>
+  Array.isArray(window.filterRenderStat)
+    ? window.filterRenderStat.filter((item) => !!item?.render)
+    : [];
+
+function getBoards(item: FilterRenderStatItem) {
+  return item.search_settings?.idx_extra_board || [];
 }
 
-export function getMainBoardId(): string {
-  const main = getBoards().find((b) => b.main);
+export function getMainBoardId(item: FilterRenderStatItem): string {
+  const main = getBoards(item).find((b) => b.main);
   return main ? `${main.board_id}` : "1";
 }
 
-export function getExtraBoardIds(): string[] {
-  return getBoards()
+export function getExtraBoardIds(item: FilterRenderStatItem): string[] {
+  return getBoards(item)
     .filter((b) => !b.main)
     .map((b) => `${b.board_id}`);
 }
 
-// Filtros "planos" a partir de paramsDisplayFilter.data: los valores vacíos
-// o "--" se descartan igual que en idx-search-react-2024.
-export function getDisplayFilterFilters(): { [key: string]: unknown } {
-  const pdf = window.paramsDisplayFilter?.data ?? {};
+// Filtros "planos" a partir de item.filters.data: los valores vacíos o "--" se
+// descartan igual que en idx-search-react-2024.
+export function getDisplayFilterFilters(item: FilterRenderStatItem): {
+  [key: string]: unknown;
+} {
+  const pdf = item.filters?.data ?? {};
   const filters: { [key: string]: unknown } = {};
 
   for (const [key, value] of Object.entries(pdf)) {
@@ -51,8 +61,10 @@ export function getDisplayFilterFilters(): { [key: string]: unknown } {
 }
 
 // Backend espera [lat, lng] (mismo orden que persiste el WP saved-search).
-export function getDisplayFilterPolygon(): [string, string][] {
-  let raw = window.paramsDisplayFilter?.data?.polygon_arr;
+export function getDisplayFilterPolygon(
+  item: FilterRenderStatItem
+): [string, string][] {
+  let raw = item.filters?.data?.polygon_arr;
   if (typeof raw === "string") {
     try {
       raw = JSON.parse(raw);

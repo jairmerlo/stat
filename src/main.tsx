@@ -2,14 +2,16 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
+import { getFilterRenderStatItems } from './helpers/displayFilter'
 
-// Only mount when the host page provides the container
-const container = document.getElementById('root-search-stat')
+// Una instancia por item de filterRenderStat, montada en #{item.render}
+getFilterRenderStatItems().forEach((item) => {
+  const container = document.getElementById(String(item.render))
+  if (!container) return
 
-if (container) {
   createRoot(container).render(
     <StrictMode>
-      <App />
+      <App item={item} />
     </StrictMode>,
   )
-}
+})
